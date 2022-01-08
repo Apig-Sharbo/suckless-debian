@@ -5,6 +5,11 @@
 ## Tested with Debian 11.2 (bullseye)
 #####
 
+#   -e  Exit immediately if a simple command exits with a non-zero status, unless
+#   the command that fails is part of an until or  while loop, part of an
+#   if statement, part of a && or || list, or if the command's return status
+#   is being inverted using !.  -o errexit
+set -e
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 
@@ -33,7 +38,6 @@ sudo apt-get install -y \
   x11proto-dev \
   libx11-dev \
   libxinerama-dev \
-    || exit 1
 
 ## Only of you plan to not install libxft-bgra
 # sudo apt-get install -y libxft-dev
