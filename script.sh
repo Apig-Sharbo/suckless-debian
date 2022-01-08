@@ -21,7 +21,7 @@ fontDir='/usr/share/fonts/joypixels'
 font="joypixels.ttf"
 
 sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
-sudo curl -Lo "$fontDir"/$font.ttf "$fontURL"
+sudo curl -LSs -o "$fontDir"/$font.ttf "$fontURL"
 [ -f "$fontDir"/$font ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
 
 sudo apt-get install -y \
@@ -86,13 +86,13 @@ if [ ! -d /opt ]; then
     sudo mkdir /opt || { printf '%s\n' 'Failed to create dir: /opt' 1>&2 && exit 1; }
 fi
 
-sudo curl -Lo $libxftTempFile $libxftRepo
+sudo curl -LSs -o $libxftTempFile $libxftRepo
 [ -f $libxftTempFile ] || { printf '%s\n' "Could not find file: $libxftTempFile" 1>&2 && exit 1; }
 
 sudo tar -xzvf $libxftTempFile -C ${libxftDir%/*}
 [ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
-sudo curl -Lo $libxftDir/$libxftPatch $libxftPatchURL
+sudo curl -LSs -o $libxftDir/$libxftPatch $libxftPatchURL
 [ -f "$libxftDir/$libxftPatch" ] || { printf '%s\n' "Could not find file: $libxftDir/$libxftPatch" 1>&2 && exit 1; }
 
 sudo patch -d $libxftDir -p1 < $libxftDir/$libxftPatch
