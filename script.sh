@@ -75,7 +75,7 @@ sudo apt-get install -y \
 libxftVersion=libxft-master
 libxftTempFile=/tmp/$libxftVersion.tar.gz
 libxftDir=$HOME/$libxftVersion
-curl -LSso $libxftTemp.tar.gz "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftTempFile"
+curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftTempFile"
 tar -xzvf $libxftTempFile -C $HOME
 [ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
