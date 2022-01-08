@@ -73,9 +73,10 @@ sudo apt-get install -y \
 ## Git clone sometimes take way too long to respond.
 # git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git
 libxftVersion=libxft-master
+libxftTempFile=/tmp/$libxftVersion.tar.gz
 libxftDir=$HOME/$libxftVersion
-curl -LSso /tmp/$libxftVersion 'https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/libxft-master.tar.gz'
-tar -xzvf $libxftVersion.tar.gz -c $HOME
+curl -LSso $libxftTemp.tar.gz "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftTempFile"
+tar -xzvf $libxftTempFile -c $HOME
 
 curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
 patch -d $libxftDir -p1 < $libxftDir/1.patch
