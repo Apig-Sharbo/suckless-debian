@@ -74,7 +74,7 @@ sudo apt-get install -y \
 # git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git
 libxftVersion=libxft-master
 libxftArchive=$libxftVersion.tar.gz
-libxftTempFile=/tmp/$libxftVersion.tar.gz
+libxftTempFile=/tmp/$libxftArchive
 libxftDir=$HOME/$libxftVersion
 curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
 tar -xzvf $libxftTempFile -C $HOME
