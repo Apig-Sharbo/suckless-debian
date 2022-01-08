@@ -93,7 +93,7 @@ sudo tar -xzvf $libxftTempFile -C ${libxftDir%/*}
 [ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
 sudo curl -Lo $libxftDir/$libxftPatch $libxftPatchURL
-[ -f $libxftPatch ] || { printf '%s\n' "Could not find file: $libxftPatch" 1>&2 && exit 1; }
+[ -f "$libxftDir/$libxftPatch" ] || { printf '%s\n' "Could not find file: $libxftDir/$libxftPatch" 1>&2 && exit 1; }
 
 sudo patch -d $libxftDir -p1 < $libxftDir/$libxftPatch
 sudo sh -c "cd $libxftDir && sh autogen.sh"
