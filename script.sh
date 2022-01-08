@@ -13,6 +13,8 @@
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 
+sudo apt-get install -y curl
+
 pkgver='6.6.0'
 FontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
 FontDir='/usr/share/fonts/joypixels'
