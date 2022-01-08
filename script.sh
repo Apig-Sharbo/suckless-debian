@@ -6,23 +6,7 @@
 #####
 
 
-###
-# Before running the script run this to make sure Windows line ending doesn't mess around with this script when downloading from pastebin using curl
-# sed -i 's|\r$||' script.sh
-###
-
 sudo apt-get update -y && sudo apt-get upgrade -y
-
-sudo apt-get install -y curl
-
-pkgver='6.6.0'
-fontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
-fontDir='/usr/share/fonts/joypixels'
-font="joypixels.ttf"
-
-sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
-sudo curl -LSs -o "$fontDir"/$font.ttf "$fontURL"
-[ -f "$fontDir"/$font ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
 
 sudo apt-get install -y \
   htop \
@@ -70,6 +54,17 @@ sudo apt-get install -y \
 # sudo apt-get install -y nodejs
 
 
+## Install JoyPixels font
+pkgver='6.6.0'
+fontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
+fontDir='/usr/share/fonts/joypixels'
+font="joypixels.ttf"
+
+sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
+sudo curl -LSs -o "$fontDir"/$font.ttf "$fontURL"
+[ -f "$fontDir"/$font ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
+
+
 ## libxft-bgra
 ## Git clone sometimes take way too long to respond.
 # git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git
@@ -80,7 +75,6 @@ libxftDir=/opt/$libxftVersion
 libxftRepo="https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
 libxftPatch='1.patch'
 libxftPatchURL="https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/$libxftPatch"
-
 
 if [ ! -d /opt ]; then
     sudo mkdir /opt || { printf '%s\n' 'Failed to create dir: /opt' 1>&2 && exit 1; }
