@@ -14,7 +14,8 @@ set -e
 sudo apt-get update -y && sudo apt-get upgrade -y
 
 sudo apt-get install -y \
-  xorg
+  xorg \
+  cmake \
   htop \
   xinit \
   git \
@@ -104,6 +105,12 @@ sudo apt-get install -y nodejs
 
 
 ## Suckless apps:
+mkdir -p $HOME/suckless/j4-dmenu-desktop
+git clone 'https://github.com/enkore/j4-dmenu-desktop.git' $HOME/suckless/j4-dmenu-desktop
+cmake $HOME/suckless/j4-dmenu-desktop
+make -C $HOME/suckless/j4-dmenu-desktop
+sudo make -C $HOME/suckless/j4-dmenu-desktop install
+
 mkdir -p $HOME/suckless/dwm-apig
 git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' $HOME/suckless/dwm-apig
 sudo make -C $HOME/suckless/dwm-apig clean install
