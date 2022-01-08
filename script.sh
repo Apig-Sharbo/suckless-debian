@@ -100,15 +100,15 @@ sudo apt-get purge --auto-remove -y nodejs
 ## Suckless apps:
 mkdir -p "$HOME"/suckless/dwm-apig
 git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' "$HOME"/suckless/dwm-apig
-sudo make -C "$HOME"/dwm-apig clean install
+sudo make -C "$HOME"/suckless/dwm-apig clean install
 
 mkdir -p "$HOME"/suckless/st-apig
 git clone 'https://gitlab.com/apig-sharbo/st-apig.git' "$HOME"/suckless/st-apig
-sudo make -C "$HOME"/st-apig clean install
+sudo make -C "$HOME"/suckless/st-apig clean install
 
 mkdir -p "$HOME"/suckless/st-apig
 git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' "$HOME"/suckless/dmenu-apig
-sudo make -C "$HOME"/dmenu-apig clean install
+sudo make -C "$HOME"/suckless/dmenu-apig clean install
 
 
 ## For startx
