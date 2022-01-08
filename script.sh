@@ -19,7 +19,7 @@ pkgver='6.6.0'
 fontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
 fontDir='/usr/share/fonts/joypixels'
 
-sudo mkdir -p "$fontDir" || { printf '%s\n' 'Failed to create dir' 1>&2 && exit 1; }
+sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
 sudo curl -LSso "$fontDir"/joypixels.ttf "$fontURL"
 [ -f "$fontDir"/joypixels.ttf ] || { printf '%s\n' 'Failed to install JoyPixels font.' 1>&2 && exit 1; }
 
@@ -76,7 +76,8 @@ libxftVersion=libxft-master
 libxftTempFile=/tmp/$libxftVersion.tar.gz
 libxftDir=$HOME/$libxftVersion
 curl -LSso $libxftTemp.tar.gz "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftTempFile"
-tar -xzvf $libxftTempFile -c $HOME
+tar -xzvf $libxftTempFile -C $HOME
+[ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
 curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
 patch -d $libxftDir -p1 < $libxftDir/1.patch
@@ -99,21 +100,21 @@ sudo apt-get purge --auto-remove -y nodejs
 
 
 ## Suckless apps:
-mkdir -p "$HOME"/suckless/dwm-apig
-git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' "$HOME"/suckless/dwm-apig
-sudo make -C "$HOME"/suckless/dwm-apig clean install
+mkdir -p $HOME/suckless/dwm-apig
+git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' $HOME/suckless/dwm-apig
+sudo make -C $HOME/suckless/dwm-apig clean install
 
-mkdir -p "$HOME"/suckless/st-apig
-git clone 'https://gitlab.com/apig-sharbo/st-apig.git' "$HOME"/suckless/st-apig
-sudo make -C "$HOME"/suckless/st-apig clean install
+mkdir -p $HOME/suckless/st-apig
+git clone 'https://gitlab.com/apig-sharbo/st-apig.git' $HOME/suckless/st-apig
+sudo make -C $HOME/suckless/st-apig clean install
 
-mkdir -p "$HOME"/suckless/st-apig
-git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' "$HOME"/suckless/dmenu-apig
-sudo make -C "$HOME"/suckless/dmenu-apig clean install
+mkdir -p $HOME/suckless/st-apig
+git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' $HOME/suckless/dmenu-apig
+sudo make -C $HOME/suckless/dmenu-apig clean install
 
 
 ## For startx
-cat <<'EOF' > "$HOME"/.xinitrc
+cat <<'EOF' > $HOME/.xinitrc
 vmware-user &
 exec dwm
 EOF
