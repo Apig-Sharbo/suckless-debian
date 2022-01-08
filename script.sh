@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 #####
-##  This is to be ran after debian installation is done in "vmware".
+## This is to be ran after debian installation is done in "vmware".
+## Tested with Debian 11.2 (bullseye)
 #####
 
 
@@ -12,23 +13,13 @@
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 
-####
-## IMPORTANT
-## For whatever reason libxft-bgra will still not work, unless nodejs package is installed.
-## Even weirder is that after installing nodejs, removing nodejs again will not stop libxft-bgra from working.
-## Installing at the start doesn't fix the issue. The following fixed it:
-## sudo apt purge --auto-remove nodejs
-## The act of interacting with the package AFTER libxft is installed, seems to make libxft work properly.
-## I will install it now, and remove it after libxft installation.
-####
-sudo apt-get install -y nodejs
-
 pkgver='6.6.0'
 FontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
 FontDir='/usr/share/fonts/joypixels'
 
-sudo mkdir -p "$FontDir" || { printf 'Failed to create dir\n' 1>&2 && exit 1; }
-sudo curl -Lo "$FontDir"/joypixels.ttf "$FontURL"
+sudo mkdir -p "$FontDir" || { printf '%s\n' 'Failed to create dir' 1>&2 && exit 1; }
+sudo curl -LSso "$FontDir"/joypixels.ttf "$FontURL"
+[ -f "FontDir"/joypixels.ttf ] || { printf '%s\n' 'Failed to install JoyPixels font.' 1>&2 && exit 1; }
 
 sudo apt-get install -y \
   htop \
@@ -38,6 +29,7 @@ sudo apt-get install -y \
   curl \
   x11-xserver-utils \
   fonts-noto-mono \
+  fonts-noto-color-emoji \
   fonts-symbola
 
 # For virtualbox-guest-edition
@@ -78,44 +70,47 @@ sudo apt-get install -y \
 ## libxft-bgra
 ## Git clone sometimes take way too long to respond.
 # git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git
-curl -LSsO https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/libxft-master.tar.gz
-tar -xzvf libxft-master.tar.gz && rm libxft-master.tar.gz
-pushd libxft-master || { printf '%s\n' 'Unable to go to libxft dir' 1>&2 && exit 1; }
-curl -LO https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch
-patch -p1 < 1.patch
-sh autogen.sh
-make
-sudo make install
-popd
+libxftVersion=libxft-master
+libxftDir=$HOME/$libxftVersion
+curl -LSso /tmp/$libxftVersion 'https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/libxft-master.tar.gz'
+tar -xzvf $libxftVersion.tar.gz -c $HOME
+
+curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
+patch -d $libxftDir -p1 < $libxftDir/1.patch
+sh $libxftDir/autogen.sh
+make -C $libxftDir
+sudo make -C $libxftDir clean install
 
 
-## The reason for this is documented above
+####
+## IMPORTANT
+## For whatever reason libxft-bgra will still not work, unless nodejs package is installed.
+## Even weirder is that after installing nodejs, removing nodejs again will not stop libxft-bgra from working.
+## Installing at the start doesn't fix the issue. The following fixed it:
+## sudo apt purge --auto-remove nodejs
+## The act of interacting with the package AFTER libxft is installed, seems to make libxft work properly.
+## I will install it now, and remove it after libxft installation.
+####
+sudo apt-get install -y nodejs
 sudo apt-get purge --auto-remove -y nodejs
 
 
 ## Suckless apps:
-mkdir suckless && pushd suckless
+mkdir -p "$HOME"/suckless/dwm-apig
+git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' "$HOME"/suckless/dwm-apig
+sudo make -C "$HOME"/dwm-apig clean install
 
-git clone https://gitlab.com/apig-sharbo/dwm-apig.git
-pushd dwm-apig
-sudo make clean install
-popd
+mkdir -p "$HOME"/suckless/st-apig
+git clone 'https://gitlab.com/apig-sharbo/st-apig.git' "$HOME"/suckless/st-apig
+sudo make -C "$HOME"/st-apig clean install
 
-git clone https://gitlab.com/apig-sharbo/st-apig.git
-pushd st-apig
-sudo make clean install
-popd
-
-git clone https://gitlab.com/apig-sharbo/dmenu-apig.git
-pushd dmenu-apig
-sudo make clean install
-popd
-
-popd
+mkdir -p "$HOME"/suckless/st-apig
+git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' "$HOME"/suckless/dmenu-apig
+sudo make -C "$HOME"/dmenu-apig clean install
 
 
 ## For startx
-cat <<'EOF' > .xinitrc
+cat <<'EOF' > "$HOME"/.xinitrc
 vmware-user &
 exec dwm
 EOF
