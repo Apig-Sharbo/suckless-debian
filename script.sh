@@ -12,38 +12,28 @@ sudo apt-get install -y \
   htop \
   xinit \
   git \
-  exa \
   curl \
   x11-xserver-utils \
   fonts-noto-mono \
   fonts-noto-color-emoji \
-  fonts-symbola
-
-# For virtualbox-guest-edition
-sudo apt-get install -y \
+  fonts-symbola \
   linux-headers-$( uname -r ) \
   build-essential \
   dkms \
   xclip \
   neovim \
-  open-vm-tools-desktop
-
-
-# For libxft-bgra to compile
-sudo apt-get install -y \
+  open-vm-tools-desktop \
   libxrender-dev \
   autoconf \
   xutils-dev \
   libfontconfig-dev \
   libfreetype6-dev \
   libtool-bin \
-  libtool
-
-# For suckless apps
-sudo apt-get install -y \
+  libtool \
   x11proto-dev \
   libx11-dev \
-  libxinerama-dev
+  libxinerama-dev \
+    || exit 1
 
 ## Only of you plan to not install libxft-bgra
 # sudo apt-get install -y libxft-dev
