@@ -14,6 +14,7 @@ set -e
 sudo apt-get update -y && sudo apt-get upgrade -y
 
 sudo apt-get install -y \
+  xorg
   htop \
   xinit \
   git \
@@ -29,7 +30,7 @@ sudo apt-get install -y \
   neovim \
   open-vm-tools-desktop \
   libxrender-dev \
-  autoconf \
+  automake \
   xutils-dev \
   libfontconfig-dev \
   libfreetype6-dev \
@@ -37,7 +38,7 @@ sudo apt-get install -y \
   libtool \
   x11proto-dev \
   libx11-dev \
-  libxinerama-dev \
+  libxinerama-dev
 
 ## Only of you plan to not install libxft-bgra
 # sudo apt-get install -y libxft-dev
