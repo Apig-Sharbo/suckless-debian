@@ -18,10 +18,11 @@ sudo apt-get install -y curl
 pkgver='6.6.0'
 fontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
 fontDir='/usr/share/fonts/joypixels'
+font="joypixels.ttf"
 
 sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
-sudo curl -LSso "$fontDir"/joypixels.ttf "$fontURL"
-[ -f "$fontDir"/joypixels.ttf ] || { printf '%s\n' 'Failed to install JoyPixels font.' 1>&2 && exit 1; }
+sudo curl -Lo "$fontDir"/$font.ttf "$fontURL"
+[ -f "$fontDir"/$font ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
 
 sudo apt-get install -y \
   htop \
@@ -76,17 +77,25 @@ libxftVersion=libxft-master
 libxftArchive=$libxftVersion.tar.gz
 libxftTempFile=/tmp/$libxftArchive
 libxftDir=/opt/$libxftVersion
+libxftRepo="https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
+libxftPatch='1.patch'
+libxftPatchURL="https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/$libxftPatch"
+
 
 if [ ! -d /opt ]; then
     sudo mkdir /opt || { printf '%s\n' 'Failed to create dir: /opt' 1>&2 && exit 1; }
 fi
 
-sudo curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
+sudo curl -Lo $libxftTempFile $libxftRepo
+[ -f $libxftTempFile ] || { printf '%s\n' "Could not find file: $libxftTempFile" 1>&2 && exit 1; }
+
 sudo tar -xzvf $libxftTempFile -C ${libxftDir%/*}
 [ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
-sudo curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
-sudo patch -d $libxftDir -p1 < $libxftDir/1.patch
+sudo curl -Lo $libxftDir/$libxftPatch $libxftPatchURL
+[ -f $libxftPatch ] || { printf '%s\n' "Could not find file: $libxftPatch" 1>&2 && exit 1; }
+
+sudo patch -d $libxftDir -p1 < $libxftDir/$libxftPatch
 sudo sh -c "cd $libxftDir && sh autogen.sh"
 sudo make -C $libxftDir
 sudo make -C $libxftDir clean install
@@ -102,7 +111,7 @@ sudo make -C $libxftDir clean install
 ## I will install it now, and remove it after libxft installation.
 ####
 sudo apt-get install -y nodejs
-sudo apt-get purge --auto-remove -y nodejs
+# sudo apt-get purge --auto-remove -y nodejs
 
 
 ## Suckless apps:
