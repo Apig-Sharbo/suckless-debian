@@ -82,7 +82,7 @@ tar -xzvf $libxftTempFile -C $HOME
 
 curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
 patch -d $libxftDir -p1 < $libxftDir/1.patch
-sh -c cd $libxftDir && sh autogen.sh
+sh -c "cd $libxftDir && sh autogen.sh"
 make -C $libxftDir
 sudo make -C $libxftDir clean install
 
