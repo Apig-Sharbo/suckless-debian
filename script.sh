@@ -77,9 +77,9 @@ libxftArchive=$libxftVersion.tar.gz
 libxftTempFile=/tmp/$libxftArchive
 libxftDir=/opt/$libxftVersion
 
-if [ ! -d /opt ]; {
+if [ ! -d /opt ]; then
     sudo mkdir /opt || { printf '%s\n' 'Failed to create dir: /opt' 1>&2 && exit 1; }
-}
+fi
 
 curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
 tar -xzvf $libxftTempFile -C $HOME
