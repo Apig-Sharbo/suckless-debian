@@ -81,12 +81,12 @@ if [ ! -d /opt ]; then
     sudo mkdir /opt || { printf '%s\n' 'Failed to create dir: /opt' 1>&2 && exit 1; }
 fi
 
-curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
-tar -xzvf $libxftTempFile -C ${libxftDir%/*}
+sudo curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
+sudo tar -xzvf $libxftTempFile -C ${libxftDir%/*}
 [ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
-curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
-patch -d $libxftDir -p1 < $libxftDir/1.patch
+sudo curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
+sudo patch -d $libxftDir -p1 < $libxftDir/1.patch
 sudo sh -c "cd $libxftDir && sh autogen.sh"
 sudo make -C $libxftDir
 sudo make -C $libxftDir clean install
