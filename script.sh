@@ -61,8 +61,8 @@ fontDir='/usr/share/fonts/joypixels'
 font="joypixels.ttf"
 
 sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
-sudo curl -LSs -o "$fontDir"/$font.ttf "$fontURL"
-[ -f "$fontDir"/$font ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
+sudo curl -LSs -o "$fontDir/$font" "$fontURL"
+[ -f "$fontDir/$font" ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
 
 
 ## libxft-bgra
