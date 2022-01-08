@@ -16,12 +16,12 @@ sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install -y curl
 
 pkgver='6.6.0'
-FontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
-FontDir='/usr/share/fonts/joypixels'
+fontURL="https://cdn.joypixels.com/arch-linux/font/${pkgver}/joypixels-android.ttf"
+fontDir='/usr/share/fonts/joypixels'
 
-sudo mkdir -p "$FontDir" || { printf '%s\n' 'Failed to create dir' 1>&2 && exit 1; }
-sudo curl -LSso "$FontDir"/joypixels.ttf "$FontURL"
-[ -f "FontDir"/joypixels.ttf ] || { printf '%s\n' 'Failed to install JoyPixels font.' 1>&2 && exit 1; }
+sudo mkdir -p "$fontDir" || { printf '%s\n' 'Failed to create dir' 1>&2 && exit 1; }
+sudo curl -LSso "$fontDir"/joypixels.ttf "$fontURL"
+[ -f "$fontDir"/joypixels.ttf ] || { printf '%s\n' 'Failed to install JoyPixels font.' 1>&2 && exit 1; }
 
 sudo apt-get install -y \
   htop \
