@@ -82,7 +82,7 @@ if [ ! -d /opt ]; then
 fi
 
 curl -LSso $libxftTempFile "https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$libxftArchive"
-tar -xzvf $libxftTempFile -C $HOME
+tar -xzvf $libxftTempFile -C ${libxftDir%/*}
 [ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
 curl -LSso $libxftDir/1.patch 'https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/1.patch'
