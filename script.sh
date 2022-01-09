@@ -18,6 +18,7 @@ sudo apt-get install -y \
   cmake \
   htop \
   xinit \
+  flatpak \
   git \
   curl \
   x11-xserver-utils \
@@ -40,6 +41,9 @@ sudo apt-get install -y \
   x11proto-dev \
   libx11-dev \
   libxinerama-dev
+
+# Flatpak setup
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 ## Only of you plan to not install libxft-bgra
 # sudo apt-get install -y libxft-dev
