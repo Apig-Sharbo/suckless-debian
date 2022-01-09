@@ -137,5 +137,5 @@ sudo make -C $Dir clean install
 ## For startx
 cat <<'EOF' > $HOME/.xinitrc
 vmware-user &
-exec dwm
+exec dbus-run-session dwm
 EOF
