@@ -106,22 +106,26 @@ sudo apt-get install -y nodejs
 
 ## Suckless apps:
 mkdir -p $HOME/suckless/j4-dmenu-desktop
-git clone 'https://github.com/enkore/j4-dmenu-desktop.git' $HOME/suckless/j4-dmenu-desktop
-cmake $HOME/suckless/j4-dmenu-desktop
-make -C $HOME/suckless/j4-dmenu-desktop
-sudo make -C $HOME/suckless/j4-dmenu-desktop install
+Dir=$HOME/suckless/j4-dmenu-desktop
+git clone 'https://github.com/enkore/j4-dmenu-desktop.git' $Dir
+cmake -S $Dir -B $Dir
+make -C $Dir
+sudo make -C $Dir install
 
 mkdir -p $HOME/suckless/dwm-apig
-git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' $HOME/suckless/dwm-apig
+Dir=$HOME/suckless/dwm-apig
+git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' $Dir
 sudo make -C $HOME/suckless/dwm-apig clean install
 
 mkdir -p $HOME/suckless/st-apig
-git clone 'https://gitlab.com/apig-sharbo/st-apig.git' $HOME/suckless/st-apig
-sudo make -C $HOME/suckless/st-apig clean install
+Dir=$HOME/suckless/st-apig
+git clone 'https://gitlab.com/apig-sharbo/st-apig.git' $Dir
+sudo make -C $Dir clean install
 
 mkdir -p $HOME/suckless/st-apig
-git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' $HOME/suckless/dmenu-apig
-sudo make -C $HOME/suckless/dmenu-apig clean install
+Dir=$HOME/suckless/dmenu-apig
+git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' $Dir
+sudo make -C $Dir clean install
 
 
 ## For startx
