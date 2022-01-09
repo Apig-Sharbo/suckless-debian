@@ -58,7 +58,7 @@ font="joypixels.ttf"
 
 sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&2 && exit 1; }
 sudo curl -LSs -o "$fontDir/$font" "$fontURL"
-[ -f "$fontDir/$font" ] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
+[[ -f $fontDir/$font ]] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
 
 
 ## libxft-bgra
@@ -72,18 +72,18 @@ libxftRepo="https://gitlab.freedesktop.org/xorg/lib/libxft/-/archive/master/$lib
 libxftPatch='1.patch'
 libxftPatchURL="https://gitlab.freedesktop.org/xorg/lib/libxft/merge_requests/$libxftPatch"
 
-if [ ! -d /opt ]; then
+if [[ ! -d /opt ]]; then
     sudo mkdir /opt || { printf '%s\n' 'Failed to create dir: /opt' 1>&2 && exit 1; }
 fi
 
 sudo curl -LSs -o $libxftTempFile $libxftRepo
-[ -f $libxftTempFile ] || { printf '%s\n' "Could not find file: $libxftTempFile" 1>&2 && exit 1; }
+[[ -f $libxftTempFile ]] || { printf '%s\n' "Could not find file: $libxftTempFile" 1>&2 && exit 1; }
 
 sudo tar -xzvf $libxftTempFile -C ${libxftDir%/*}
-[ -d $libxftDir ] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
+[[ -d $libxftDir ]] || { printf '%s\n' "Could not find dir: $libxftDir" 1>&2 && exit 1; }
 
 sudo curl -LSs -o $libxftDir/$libxftPatch $libxftPatchURL
-[ -f "$libxftDir/$libxftPatch" ] || { printf '%s\n' "Could not find file: $libxftDir/$libxftPatch" 1>&2 && exit 1; }
+[[ -f $libxftDir/$libxftPatch ]] || { printf '%s\n' "Could not find file: $libxftDir/$libxftPatch" 1>&2 && exit 1; }
 
 sudo patch -d $libxftDir -p1 < $libxftDir/$libxftPatch
 sudo sh -c "cd $libxftDir && sh autogen.sh"
