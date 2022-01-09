@@ -115,7 +115,7 @@ sudo make -C $Dir install
 mkdir -p $HOME/suckless/dwm-apig
 Dir=$HOME/suckless/dwm-apig
 git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' $Dir
-sudo make -C $HOME/suckless/dwm-apig clean install
+sudo make -C $Dir clean install
 
 mkdir -p $HOME/suckless/st-apig
 Dir=$HOME/suckless/st-apig
