@@ -47,6 +47,9 @@ sudo apt-get install -y \
 # Flatpak setup
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+# Unmute audio and set volume to 100
+pulsemixer --unmute --set-volume 100
+
 ## Only of you plan to not install libxft-bgra
 # sudo apt-get install -y libxft-dev
 
