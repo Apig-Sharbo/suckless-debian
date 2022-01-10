@@ -114,25 +114,25 @@ sudo apt-get install -y nodejs
 
 
 ## Suckless apps:
-mkdir -p $HOME/suckless/j4-dmenu-desktop
 Dir=$HOME/suckless/j4-dmenu-desktop
+mkdir -p $Dir
 git clone 'https://github.com/enkore/j4-dmenu-desktop.git' $Dir
 cmake -S $Dir -B $Dir
 make -C $Dir
 sudo make -C $Dir install
 
-mkdir -p $HOME/suckless/dwm-apig
 Dir=$HOME/suckless/dwm-apig
+mkdir -p $Dir
 git clone 'https://gitlab.com/apig-sharbo/dwm-apig.git' $Dir
 sudo make -C $Dir clean install
 
-mkdir -p $HOME/suckless/st-apig
 Dir=$HOME/suckless/st-apig
+mkdir -p $Dir
 git clone 'https://gitlab.com/apig-sharbo/st-apig.git' $Dir
 sudo make -C $Dir clean install
 
-mkdir -p $HOME/suckless/st-apig
 Dir=$HOME/suckless/dmenu-apig
+mkdir -p $Dir
 git clone 'https://gitlab.com/apig-sharbo/dmenu-apig.git' $Dir
 sudo make -C $Dir clean install
 
