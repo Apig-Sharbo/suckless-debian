@@ -71,6 +71,27 @@ sudo mkdir -p "$fontDir" || { printf '%s\n' "Failed to create dir: $fontDir" 1>&
 sudo curl -LSs -o "$fontDir/$font" "$fontURL"
 [[ -f $fontDir/$font ]] || { printf '%s\n' 'Could not find JoyPixels font.' 1>&2 && exit 1; }
 
+# Set font priority
+mkdir -p $HOME/.config/fontconfig/conf.d
+cat <<'EOF' > $HOME/.config/fontconfig/conf.d/50-family-defaults.conf
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>
+
+   <!-- Override "Noto Color Emoji" when "emoji" family is called -->
+    <match>
+        <test name="family"><string>emoji</string></test>
+        <edit name="family" mode="assign" binding="strong">
+            <string>JoyPixels</string>
+        </edit>
+    </match>
+
+</fontconfig>
+EOF
+
+# Apply font priority to all users
+ls -s $HOME/.config/fontconfig/conf.d/50-family-defaults.conf /etc/fonts/conf.d
+
 
 ## libxft-bgra
 ## Git clone sometimes take way too long to respond.
