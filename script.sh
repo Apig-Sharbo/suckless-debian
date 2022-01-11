@@ -47,6 +47,8 @@ sudo apt-get install -y \
 # Flatpak setup
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+# Start pulseaudio
+pulseaudio --start
 # Unmute audio and set volume to 100
 pulsemixer --unmute --set-volume 100
 
