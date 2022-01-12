@@ -90,7 +90,7 @@ cat <<'EOF' > $HOME/.config/fontconfig/conf.d/50-family-defaults.conf
 EOF
 
 # Apply font priority to all users
-ls -s $HOME/.config/fontconfig/conf.d/50-family-defaults.conf /etc/fonts/conf.d
+sudo ln -s $HOME/.config/fontconfig/conf.d/50-family-defaults.conf /etc/fonts/conf.d
 
 
 ## libxft-bgra
