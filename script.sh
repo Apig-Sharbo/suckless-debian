@@ -11,7 +11,8 @@
 #   is being inverted using !.  -o errexit
 set -e
 
-EMOJI_SUPPORT='yes'
+# Set to 'yes' to enable
+EMOJI_SUPPORT='no'
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 
