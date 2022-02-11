@@ -24,6 +24,7 @@ sudo apt-get install -y \
   htop \
   xinit \
   flatpak \
+  qbittorrent \
   git \
   curl \
   x11-xserver-utils \
