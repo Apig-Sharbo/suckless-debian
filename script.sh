@@ -26,6 +26,9 @@ sudo apt-get install -y \
   flatpak \
   qbittorrent \
   git \
+  mpv \
+  pcmanfm \
+  ffmpegthumbnailer \
   curl \
   x11-xserver-utils \
   fonts-noto-mono \
