@@ -27,6 +27,7 @@ sudo apt-get install -y \
   qbittorrent \
   git \
   mpv \
+  sxiv \
   pcmanfm \
   ffmpegthumbnailer \
   chromium \
