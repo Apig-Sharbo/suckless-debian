@@ -29,6 +29,7 @@ sudo apt-get install -y \
   mpv \
   pcmanfm \
   ffmpegthumbnailer \
+  chromium \
   curl \
   x11-xserver-utils \
   fonts-noto-mono \
