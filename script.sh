@@ -50,7 +50,10 @@ sudo apt-get install -y \
   libtool \
   x11proto-dev \
   libx11-dev \
-  libxinerama-dev
+  libxinerama-dev \
+  qt5ct \
+  lxappearance \
+  breeze-icon-theme
 
 # Docker Stable
 sudo apt-get install \
