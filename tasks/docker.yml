@@ -1,29 +1,36 @@
 ---
- - name: "Install docker deps"
-   apt:
-     name:
-       - ca-certificate
-       - curl
-       - gnugpg
-       - lsb-release
-     update_cache: yes
-   become: true
+- name: "Install docker deps"
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    update_cache: yes
+  become: true
 
- - name: "Add docker gpg key"
-   ansible.builtin.apt_key:
-     url: https://download.docker.com/linux/debian/gpg
-     # file: /usr/share/keyrings/docker-archive-keyring.gpg
+# - name: "Add docker gpg key"
+#   ansible.builtin.apt_key:
+#     url: https://download.docker.com/linux/debian/gpg
+#     # file: /usr/share/keyrings/docker-archive-keyring.gpg
 
- - name: "Add docker source repo"
-   ansible.builtin.apt_repository:
-     repo: deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
-   become: true
+- name: "Download the Docker package repository signing key"
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /usr/share/keyrings/docker-archive-keyring.gpg
+  become: true
 
- - name: "Install docker"
-   apt:
-     name:
-       - docker-ce
-       - docker-ce-cli
-       - containerd.io
-     update_cache: yes
-   become: true
+- name: "Add docker source repo"
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
+    filename: docker
+  become: true
+
+- name: "Install docker"
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    update_cache: yes
+  become: true
