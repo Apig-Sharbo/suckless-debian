@@ -1,7 +1,7 @@
 ---
 - name: "Add google-chrome source repo"
-    ansible.builtin.apt_repository:
-      repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
   become: true
 
 - name: "Add google-chrome gpg key"

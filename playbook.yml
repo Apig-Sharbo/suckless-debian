@@ -2,4 +2,8 @@
   gather_facts: yes
   hosts: all
   tasks:
-    - include_tasks: tasks/main.yml
+    - include_tasks: "{{ item }}"
+      loop:
+        - tasks/main.yml
+        - tasks/google-chrome.yml
+        # - tasks/docker.yml
