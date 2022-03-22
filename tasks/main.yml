@@ -8,11 +8,11 @@
   command: apt-get update -y && apt-get upgrade -y
   become: yes
 
-    # - name: Update apt-get repo and cache
-    #   apt:
-    #     update_cache=yes
-    #     force_apt_get=yes
-    #     cache_valid_time=0
+# - name: Update apt-get repo and cache
+#   apt:
+#     update_cache=yes
+#     force_apt_get=yes
+#     cache_valid_time=0
 
 - name: "Install deps"
   apt:
@@ -72,34 +72,34 @@
     update_cache: yes
   become: true
 
-- name: "Install docker deps"
-  apt:
-    name:
-      - ca-certificate
-      - curl
-      - gnugpg
-      - lsb-release
-    update_cache: yes
-  become: true
+# - name: "Install docker deps"
+#   apt:
+#     name:
+#       - ca-certificate
+#       - curl
+#       - gnugpg
+#       - lsb-release
+#     update_cache: yes
+#   become: true
 
-- name: "Add docker gpg key"
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/debian/gpg
-    # file: /usr/share/keyrings/docker-archive-keyring.gpg
+# - name: "Add docker gpg key"
+#   ansible.builtin.apt_key:
+#     url: https://download.docker.com/linux/debian/gpg
+#     # file: /usr/share/keyrings/docker-archive-keyring.gpg
 
-- name: "Add docker source repo"
-  ansible.builtin.apt_repository:
-    repo: deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
-  become: true
+# - name: "Add docker source repo"
+#   ansible.builtin.apt_repository:
+#     repo: deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
+#   become: true
 
-- name: "Install docker"
-  apt:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-    update_cache: yes
-  become: true
+# - name: "Install docker"
+#   apt:
+#     name:
+#       - docker-ce
+#       - docker-ce-cli
+#       - containerd.io
+#     update_cache: yes
+#   become: true
 
 # - name: "Clone repo"
 #   git:

@@ -2,7 +2,3 @@
   hosts: default
   # hosts: webserver
   gather_facts: yes
-
-  roles:
-    - ansible-notejam-django-installation
-    - ansible-notejam-django-db-setup
