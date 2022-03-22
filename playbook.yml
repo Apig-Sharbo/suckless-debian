@@ -1,4 +1,5 @@
 - name: "suckless setup"
-  hosts: default
-  # hosts: webserver
   gather_facts: yes
+  hosts: all
+  tasks:
+    - include_tasks: tasks/main.yml
