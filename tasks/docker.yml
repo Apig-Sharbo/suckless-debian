@@ -14,12 +14,6 @@
     url: https://download.docker.com/linux/debian/gpg
   become: true
 
-# - name: "Download the Docker package repository signing key"
-#   ansible.builtin.get_url:
-#     url: https://download.docker.com/linux/debian/gpg
-#     dest: /usr/share/keyrings/docker-archive-keyring.gpg
-#   become: true
-
 - name: "Add docker source repo"
   ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable
