@@ -1,16 +1,39 @@
 ---
-- name: "Add google-chrome gpg key"
-  ansible.builtin.apt_key:
-    url: https://dl.google.com/linux/linux_signing_key.pub
-    # file: /etc/apt/trusted.gpg.d/google.gpg
+- name: Ansible check file exists google-chrome gpg key
+  stat:
+    path: /usr/share/keyrings/google-chrome.gpg
+  register: gpg
+- debug:
+    msg: "google-chrome.gpg File exists..."
+  when: gpg.stat.exists
+- debug:
+    msg: "google-chrome.gpg File not found"
+  when: gpg.stat.exists == False
+
+- name: Add google-chrome GPG apt Key
+  shell: 'curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --batch --yes --dearmor -o /usr/share/keyrings/google-chrome.gpg'
+  when: not gpg.stat.exists
   become: true
+
+- name: Ansible check file exists google-chrome repo
+  stat:
+    path: /etc/apt/sources.list.d/google-chrome.list
+  register: repo
+- debug:
+    msg: "google-chrome repo File exists..."
+  when: repo.stat.exists
+- debug:
+    msg: "google-chrome repo File not found"
+  when: repo.stat.exists == False
 
 - name: "Add google-chrome source repo"
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main
       ## This here is important since we are downloading this file, then when we install google chrome, the package adds the same repo in a file again.
       ## The file being the same name, means it will be overridden, which is good, since having two files ( 2 of the same apt repos ), will result in error.
+      # The filename is automatically appended by .list
     filename: google-chrome
+  when: not repo.stat.exists
   become: true
 
 - name: "Install google-chrome"
