@@ -9,20 +9,20 @@
     update_cache: yes
   become: true
 
-# - name: "Add docker gpg key"
-#   ansible.builtin.apt_key:
-#     url: https://download.docker.com/linux/debian/gpg
-#     # file: /usr/share/keyrings/docker-archive-keyring.gpg
-
-- name: "Download the Docker package repository signing key"
-  ansible.builtin.get_url:
+- name: "Add docker gpg key"
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/debian/gpg
-    dest: /usr/share/keyrings/docker-archive-keyring.gpg
   become: true
+
+# - name: "Download the Docker package repository signing key"
+#   ansible.builtin.get_url:
+#     url: https://download.docker.com/linux/debian/gpg
+#     dest: /usr/share/keyrings/docker-archive-keyring.gpg
+#   become: true
 
 - name: "Add docker source repo"
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable
     filename: docker
   become: true
 
@@ -33,4 +33,11 @@
       - docker-ce-cli
       - containerd.io
     update_cache: yes
+  become: true
+
+- name: "Add user to docker group"
+  ansible.builtin.user:
+    name: vagrant
+    groups: docker
+    append: yes
   become: true

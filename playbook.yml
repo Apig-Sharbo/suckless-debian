@@ -6,4 +6,4 @@
       loop:
         - tasks/main.yml
         - tasks/google-chrome.yml
-        # - tasks/docker.yml
+        - tasks/docker.yml
