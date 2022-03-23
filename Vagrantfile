@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you are using for more
   # information on available options.
   config.vm.provider "vmware_fusion" do |v|
-    v.gui = true
+    v.gui = false
     v.vmx["memsize"] = "2048"
     v.vmx["numvcpus"] = "2"
   end
