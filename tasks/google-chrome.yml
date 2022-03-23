@@ -8,7 +8,9 @@
 - name: "Add google-chrome source repo"
   ansible.builtin.apt_repository:
     repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-    filename: google
+      ## This here is important since we are downloading this file, then when we install google chrome, the package adds the same repo in a file again.
+      ## The file being the same name, means it will be overridden, which is good, since having two files ( 2 of the same apt repos ), will result in error.
+    filename: google-chrome
   become: true
 
 - name: "Install google-chrome"
