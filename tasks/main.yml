@@ -1,6 +1,4 @@
 ---
-# tasks file for notejam-django-installation
-
 # - name: Wait for any possibly running unattended upgrade to finish
 #   raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
 

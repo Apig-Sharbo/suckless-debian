@@ -35,11 +35,6 @@
     msg: "docker repo File not found"
   when: docker_repo.stat.exists == False
 
-# - name: "Add docker gpg key"
-#   ansible.builtin.apt_key:
-#     url: https://download.docker.com/linux/debian/gpg
-#   become: true
-
 - name: "Add docker source repo"
   ansible.builtin.apt_repository:
     repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
