@@ -55,10 +55,10 @@
   become: true
 
 
-- name: Enable pulseaudio and set volume
-  command: |
-    pulseaudio --start && \
-    pulsemixer --unmute --set-volume 100
+- name: Enable pulseaudio
+  command: pulseaudio --start
+- name: Set volume and unmute
+  command: pulsemixer --unmute --set-volume 100
 
 # - name: "Clone repo"
 #   git:
