@@ -55,6 +55,11 @@
   become: true
 
 
+- name: Enable pulseaudio and set volume
+  command: |
+    pulseaudio --start && \
+    pulsemixer --unmute --set-volume 100
+
 # - name: "Clone repo"
 #   git:
 #     repo: https://github.com/komarserjio/notejam.git
