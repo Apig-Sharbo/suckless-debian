@@ -1,39 +1,38 @@
 ---
-
 - name: "Clone j4-dmenu-desktop"
   ansible.builtin.git:
     repo: https://github.com/enkore/j4-dmenu-desktop.git
-    dest: /home/{{ user }}/suckless/j4-dmenu-desktop
+    dest: "{{ ansible_env.HOME }}/suckless/j4-dmenu-desktop"
     # accept_hostkey: yes
     # force: yes
-- command: cmake -S /home/{{ user }}/suckless/j4-dmenu-desktop -B /home/{{ user }}/suckless/j4-dmenu-desktop
-- command: make -C /home/{{ user }}/suckless/j4-dmenu-desktop
-- command: make -C /home/{{ user }}/suckless/j4-dmenu-desktop install
+- command: cmake -S "{{ ansible_env.HOME }}/suckless/j4-dmenu-desktop" -B "{{ ansible_env.HOME }}/suckless/j4-dmenu-desktop"
+- command: make -C "{{ ansible_env.HOME }}/suckless/j4-dmenu-desktop"
+- command: make -C "{{ ansible_env.HOME }}/suckless/j4-dmenu-desktop" install
   become: true
 
 - name: "Clone dwm"
   ansible.builtin.git:
     repo: https://github.com/apig-sharbo/dwm-apig.git
-    dest: /home/{{ user }}/suckless/dwm-apig
+    dest: "{{ ansible_env.HOME }}/suckless/dwm-apig"
     # accept_hostkey: yes
     # force: yes
-- command: make -C /home/{{ user }}/suckless/dwm-apig
+- command: make -C "{{ ansible_env.HOME }}/suckless/dwm-apig"
   become: true
 
 - name: "Clone st"
   ansible.builtin.git:
     repo: https://github.com/apig-sharbo/st-apig.git
-    dest: /home/{{ user }}/suckless/st-apig
+    dest: "{{ ansible_env.HOME }}/suckless/st-apig"
     # accept_hostkey: yes
     # force: yes
-- command: make -C /home/{{ user }}/suckless/st-apig
+- command: make -C "{{ ansible_env.HOME }}/suckless/st-apig"
   become: true
 
 - name: "Clone dmenu"
   ansible.builtin.git:
     repo: https://github.com/apig-sharbo/dmenu-apig.git
-    dest: /home/{{ user }}/suckless/dmenu-apig
+    dest: "{{ ansible_env.HOME }}/suckless/dmenu-apig"
     # accept_hostkey: yes
     # force: yes
-- command: make -C /home/{{ user }}/suckless/dmenu-apig
+- command: make -C "{{ ansible_env.HOME }}/suckless/dmenu-apig"
   become: true
