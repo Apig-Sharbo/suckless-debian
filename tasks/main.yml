@@ -50,6 +50,7 @@
       - x11proto-dev
       - libx11-dev
       - libxinerama-dev
+      - libxft-dev
     update_cache: yes
     state: present
   become: true

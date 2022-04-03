@@ -4,7 +4,7 @@
   tasks:
     - include_tasks: "{{ item }}"
       loop:
-        # - tasks/main.yml
-        # - tasks/google-chrome.yml
-        # - tasks/docker.yml
+        - tasks/main.yml
+        - tasks/google-chrome.yml
+        - tasks/docker.yml
         - tasks/suckless.yml
