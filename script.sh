@@ -77,7 +77,7 @@ cat <<-'EOF' > $HOME/.config/nixpkgs/config.nix
 EOF
 
 ## Nix installation for single user
-sudo sh <(curl -L https://nixos.org/nix/install) --no-daemon
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
 . /home/debian/.nix-profile/etc/profile.d/nix.sh
 
 nix-env -iA \
